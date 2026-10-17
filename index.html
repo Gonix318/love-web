@@ -2,760 +2,719 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#eee2ff">
-<title>A Little Question 💜</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f7eaff">
+  <title>Một câu hỏi dành cho cậu 💗</title>
 
-<style>
-*{box-sizing:border-box}
+  <style>
+    /* =========================
+       1. RESET & FONT TIẾNG VIỆT
+       ========================= */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-:root{
-  --purple:#9a76d5;
-  --pink:#ed9fc9;
-  --ink:#655079;
-}
+    html {
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+    }
 
-body{
-  margin:0;
-  min-height:100vh;
-  min-height:100dvh;
-  display:grid;
-  place-items:center;
-  padding:72px 16px 25px;
-  overflow-x:hidden;
-  font-family:"Segoe UI",Arial,sans-serif;
-  color:var(--ink);
-  background:linear-gradient(135deg,#e8dcff,#ffe6f0,#f7eaff);
-  transition:background 1s;
-}
+    body,
+    button,
+    h1,
+    h2,
+    p,
+    span {
+      font-family: "Roboto", "Noto Sans", "Arial", sans-serif;
+      font-kerning: normal;
+      font-variant-ligatures: none;
+      font-synthesis: none;
+    }
 
-button{
-  font:inherit;
-  -webkit-tap-highlight-color:transparent;
-  touch-action:manipulation;
-  cursor:pointer;
-}
+    body {
+      min-height: 100vh;
+      min-height: 100dvh;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      color: #704b78;
+      background:
+        radial-gradient(ellipse at 15% 20%, #fff8ff 0%, transparent 40%),
+        radial-gradient(ellipse at 85% 80%, #ffe2f0 0%, transparent 42%),
+        linear-gradient(135deg, #f5e8ff, #ffeaf3 55%, #f9e7ff);
+    }
 
-.music{
-  position:fixed;
-  top:14px;
-  right:14px;
-  z-index:30;
-  border:1px solid #ffffffc9;
-  border-radius:30px;
-  padding:11px 15px;
-  background:#ffffffb8;
-  color:#80649e;
-  box-shadow:0 5px 18px #a58ac022;
-  backdrop-filter:blur(10px);
-}
+    button {
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
 
-.card{
-  width:100%;
-  max-width:430px;
-  position:relative;
-  z-index:2;
-  padding:30px 22px 25px;
-  text-align:center;
-  border:1px solid #ffffffd9;
-  border-radius:30px;
-  background:linear-gradient(145deg,#ffffffd9,#ffffff91);
-  box-shadow:0 22px 65px #9776bb2b,inset 0 1px #fff;
-  backdrop-filter:blur(18px);
-  animation:appear .8s ease both;
-}
+    /* =========================
+       2. TRANG CHÍNH
+       ========================= */
+    .container {
+      position: relative;
+      z-index: 2;
+      width: min(100%, 520px);
+      padding: 34px 24px;
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      border-radius: 30px;
+      background: rgba(255, 255, 255, 0.67);
+      box-shadow:
+        0 18px 60px rgba(159, 106, 174, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      animation: appear 0.9s ease both;
+    }
 
-.card:before{
-  content:"✧ · ♡ · ✧";
-  display:block;
-  color:#c6a3e4;
-  letter-spacing:9px;
-  font-size:15px;
-}
+    .top-heart {
+      margin-bottom: 15px;
+      font-size: 42px;
+      animation: heartbeat 1.6s ease-in-out infinite;
+    }
 
-.heart{
-  margin:13px 0;
-  font-size:66px;
-  line-height:1.2;
-  color:#e394c8;
-  filter:drop-shadow(0 0 15px #efa9db77);
-  animation:heartbeat 1.8s infinite;
-}
+    h1 {
+      margin-bottom: 14px;
+      color: #a35c9d;
+      font-size: clamp(25px, 6vw, 34px);
+      font-weight: 800;
+      line-height: 1.5;
+      overflow-wrap: break-word;
+    }
 
-.eyebrow{
-  font-size:10px;
-  letter-spacing:3px;
-  color:#9d80b9;
-  margin:18px 0 10px;
-}
+    .subtitle {
+      margin: 0 auto 27px;
+      color: #876d8e;
+      font-size: 16px;
+      line-height: 1.9;
+    }
 
-h1{
-  font-family:Georgia,serif;
-  font-weight:normal;
-  font-size:clamp(28px,7vw,36px);
-  line-height:1.35;
-  margin:12px 0;
-  color:#8665b1;
-}
+    .buttons {
+      position: relative;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      min-height: 62px;
+      margin-top: 12px;
+    }
 
-.description{
-  font-size:14px;
-  line-height:1.9;
-  color:#947fa2;
-  min-height:50px;
-  margin:12px 0;
-}
+    .btn {
+      position: relative;
+      min-height: 48px;
+      padding: 13px 25px;
+      border: none;
+      border-radius: 999px;
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 1.5;
+      cursor: pointer;
+      transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        opacity 0.3s ease,
+        font-size 0.25s ease;
+    }
 
-.divider{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  margin:18px 0;
-  color:#c5a5df;
-}
+    .btn:focus-visible,
+    .music-button:focus-visible {
+      outline: 3px solid #c47bc6;
+      outline-offset: 4px;
+    }
 
-.divider:before,.divider:after{
-  content:"";
-  height:1px;
-  flex:1;
-  background:linear-gradient(90deg,transparent,#d9c3eb);
-}
+    .yes-button {
+      z-index: 1;
+      color: white;
+      background: linear-gradient(135deg, #f18cbd, #c78be9);
+      box-shadow: 0 7px 20px rgba(206, 123, 183, 0.3);
+    }
 
-.divider:after{transform:scaleX(-1)}
+    .yes-button:hover {
+      transform: translateY(-3px) scale(1.04);
+      box-shadow: 0 10px 26px rgba(206, 123, 183, 0.4);
+    }
 
-.button-stage{
-  position:relative;
-  isolation:isolate;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:14px;
-  min-height:145px;
-  width:100%;
-  padding:12px 0;
-  overflow:visible;
-}
+    .no-button {
+      z-index: 2;
+      color: #956d9c;
+      background: #f3e6fa;
+      box-shadow: 0 5px 15px rgba(155, 113, 170, 0.12);
+    }
 
-.choice{
-  position:relative;
-  flex:0 1 auto;
-  min-width:0;
-  max-width:100%;
-  border:0;
-  border-radius:50px;
-  padding:15px 22px;
-  font-size:15px;
-  font-weight:650;
-  white-space:nowrap;
-  transition:transform .38s cubic-bezier(.2,.8,.2,1),
-    box-shadow .3s,background .3s,opacity .3s;
-}
+    .hint {
+      min-height: 52px;
+      margin-top: 24px;
+      color: #a17ca6;
+      font-size: 14px;
+      line-height: 1.8;
+      transition: opacity 0.25s ease;
+    }
 
-#yesBtn{
-  z-index:3;
-  color:white;
-  background:linear-gradient(135deg,#a88ae8,#d7a0e5 52%,#f0a5cf);
-  box-shadow:0 8px 22px #b38ad955,inset 0 1px #ffffff9c;
-}
+    .counter {
+      margin-top: 8px;
+      color: #c08bb6;
+      font-size: 12px;
+    }
 
-#yesBtn:before{
-  content:"";
-  position:absolute;
-  inset:-4px;
-  border-radius:inherit;
-  border:1px solid #c9a8f399;
-  pointer-events:none;
-}
+    /* =========================
+       3. NÚT NHẠC
+       ========================= */
+    .music-button {
+      position: fixed;
+      z-index: 20;
+      top: 16px;
+      right: 16px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 11px 15px;
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      border-radius: 999px;
+      color: #93649b;
+      background: rgba(255, 255, 255, 0.72);
+      box-shadow: 0 4px 18px rgba(130, 89, 145, 0.12);
+      font-size: 13px;
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
 
-#yesBtn:hover{
-  box-shadow:0 10px 30px #ba8fdf99;
-}
+    /* =========================
+       4. TRÁI TIM BAY
+       ========================= */
+    .floating-heart {
+      position: fixed;
+      z-index: 1;
+      bottom: -40px;
+      pointer-events: none;
+      opacity: 0;
+      animation: floatUp linear forwards;
+      user-select: none;
+    }
 
-#noBtn{
-  z-index:5;
-  color:#8d74a1;
-  background:#fffdfd;
-  border:1px solid #e9d9f0;
-  box-shadow:0 5px 15px #a78cb41a;
-}
+    /* =========================
+       5. MÀN HÌNH KẾT THÚC
+       ========================= */
+    .ending {
+      position: fixed;
+      z-index: 10;
+      inset: 0;
+      display: none;
+      overflow: hidden;
+      justify-content: center;
+      align-items: center;
+      padding: 24px;
+      text-align: center;
+      color: #fff;
+      background:
+        radial-gradient(ellipse at 50% 45%, #714d91 0%, #39274f 42%, #19172e 100%);
+    }
 
-#noBtn.dodge{animation:wobble .32s ease}
+    .ending.active {
+      display: flex;
+      animation: fadeIn 1s ease both;
+    }
 
-.footer{
-  margin-top:15px;
-  font-size:11px;
-  letter-spacing:.7px;
-  color:#b39ec0;
-}
+    .ending-content {
+      position: relative;
+      z-index: 2;
+      width: min(100%, 560px);
+      animation: endingAppear 1.3s ease both;
+    }
 
-.counter{
-  min-height:20px;
-  margin-top:5px;
-  font-size:12px;
-  color:#a38ab8;
-}
+    .ending-heart {
+      margin-bottom: 22px;
+      font-size: clamp(65px, 18vw, 110px);
+      filter: drop-shadow(0 0 24px rgba(255, 145, 207, 0.7));
+      animation: heartbeat 1.5s ease-in-out infinite;
+    }
 
-.float-heart{
-  position:fixed;
-  z-index:1;
-  bottom:-35px;
-  pointer-events:none;
-  animation:floatUp linear forwards;
-}
+    .ending h2 {
+      margin-bottom: 22px;
+      color: #ffd8f1;
+      font-size: clamp(27px, 7vw, 39px);
+      font-weight: 800;
+      line-height: 1.6;
+      text-shadow: 0 0 22px rgba(255, 169, 226, 0.4);
+    }
 
-.shake{animation:shake .32s ease}
-.flash{animation:flash .65s ease}
+    .poem {
+      color: #f6e8ff;
+      font-size: clamp(15px, 4vw, 18px);
+      line-height: 2.1;
+      white-space: pre-line;
+    }
 
-.ending{
-  position:fixed;
-  inset:0;
-  z-index:20;
-  display:grid;
-  place-items:center;
-  overflow:hidden;
-  padding:28px 20px;
-  color:#fff3ff;
-  text-align:center;
-  background:
-    radial-gradient(ellipse at 50% 45%,#ad80d766,transparent 45%),
-    radial-gradient(ellipse at 15% 10%,#ec9bc544,transparent 40%),
-    linear-gradient(145deg,#171225,#382449 48%,#19152e);
-  opacity:0;
-  visibility:hidden;
-  transition:opacity 1.3s ease,visibility 1.3s;
-}
+    .ending-note {
+      margin-top: 25px;
+      color: #d8c3ed;
+      font-size: 13px;
+      line-height: 1.9;
+    }
 
-.ending.show{
-  opacity:1;
-  visibility:visible;
-}
+    .star {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: white;
+      box-shadow: 0 0 9px 2px rgba(255, 255, 255, 0.65);
+      animation: twinkle ease-in-out infinite alternate;
+      pointer-events: none;
+    }
 
-.ending:before,.ending:after{
-  content:"";
-  position:absolute;
-  width:75vw;
-  height:75vw;
-  max-width:520px;
-  max-height:520px;
-  border-radius:50%;
-  border:1px solid #f4d4ff28;
-  box-shadow:0 0 65px #d49aff15,inset 0 0 65px #d49aff12;
-  animation:orbit 22s linear infinite;
-}
+    .restart-button {
+      margin-top: 26px;
+      padding: 11px 21px;
+      border: 1px solid rgba(255, 255, 255, 0.45);
+      border-radius: 999px;
+      color: #fff;
+      background: rgba(255, 255, 255, 0.1);
+      font-size: 14px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
 
-.ending:after{
-  width:95vw;
-  height:95vw;
-  animation-direction:reverse;
-}
+    .restart-button:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
 
-.ending-content{
-  position:relative;
-  z-index:2;
-  width:100%;
-  max-width:480px;
-  max-height:90dvh;
-  overflow-y:auto;
-  padding:15px 0;
-  animation:rise 1.5s .2s both;
-}
+    /* =========================
+       6. HIỆU ỨNG
+       ========================= */
+    @keyframes appear {
+      from {
+        opacity: 0;
+        transform: translateY(18px) scale(0.97);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
 
-.end-eyebrow{
-  color:#dcb9f1;
-  letter-spacing:4px;
-  font-size:10px;
-}
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
 
-.end-heart{
-  font-size:clamp(65px,18vw,100px);
-  margin:15px 0;
-  filter:drop-shadow(0 0 28px #ff9fdfb8);
-  animation:heartbeat 1.6s infinite;
-}
+    @keyframes endingAppear {
+      from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.96);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
 
-.ending h2{
-  font-family:Georgia,serif;
-  font-size:clamp(29px,7vw,42px);
-  font-weight:normal;
-  line-height:1.45;
-  margin:15px 0 20px;
-  color:#ffe5f5;
-  text-shadow:0 0 30px #efa9ed65;
-}
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      15% { transform: scale(1.1); }
+      30% { transform: scale(1); }
+      45% { transform: scale(1.07); }
+      60% { transform: scale(1); }
+    }
 
-.poem{
-  font-family:Georgia,"Times New Roman",serif;
-  font-size:clamp(15px,4vw,18px);
-  line-height:2.05;
-  color:#f4e5fa;
-}
+    @keyframes floatUp {
+      0% {
+        opacity: 0;
+        transform: translateY(0) rotate(0deg) scale(0.7);
+      }
+      10% { opacity: 0.8; }
+      85% { opacity: 0.65; }
+      100% {
+        opacity: 0;
+        transform: translateY(-110vh) rotate(35deg) scale(1.2);
+      }
+    }
 
-.poem p{margin:0}
-.poem .stanza{margin-top:12px}
+    @keyframes twinkle {
+      from { opacity: 0.2; transform: scale(0.7); }
+      to { opacity: 1; transform: scale(1.35); }
+    }
 
-.poem .line{
-  opacity:0;
-  transform:translateY(8px);
-  animation:lineIn .8s ease forwards;
-}
+    /* =========================
+       7. MOBILE
+       ========================= */
+    @media (max-width: 420px) {
+      .container {
+        padding: 29px 18px;
+        border-radius: 25px;
+      }
 
-.poem .line:nth-child(1){animation-delay:.8s}
-.poem .line:nth-child(2){animation-delay:1.6s}
-.poem .line:nth-child(3){animation-delay:2.4s}
-.poem .line:nth-child(4){animation-delay:3.2s}
+      .subtitle {
+        font-size: 15px;
+      }
 
-.end-note{
-  margin:22px 0 0;
-  font-size:12px;
-  line-height:1.8;
-  color:#d5bde8;
-  opacity:0;
-  animation:lineIn .8s 4s forwards;
-}
+      .buttons {
+        gap: 10px;
+      }
 
-.again{
-  margin-top:22px;
-  padding:11px 21px;
-  border-radius:30px;
-  border:1px solid #ffffff65;
-  background:#ffffff12;
-  color:white;
-}
+      .btn {
+        padding: 12px 21px;
+      }
 
-.sparkle{
-  position:absolute;
-  color:#ffe6ff;
-  pointer-events:none;
-  text-shadow:0 0 14px #f8b8ff;
-  animation:twinkle 2s ease-in-out infinite alternate;
-}
+      .music-button {
+        top: 10px;
+        right: 10px;
+        padding: 9px 12px;
+      }
+    }
 
-@keyframes appear{
-  from{opacity:0;transform:translateY(18px)}
-  to{opacity:1;transform:translateY(0)}
-}
-
-@keyframes rise{
-  from{opacity:0;transform:translateY(28px) scale(.97)}
-  to{opacity:1;transform:translateY(0) scale(1)}
-}
-
-@keyframes heartbeat{
-  0%,100%{transform:scale(1)}
-  50%{transform:scale(1.1)}
-}
-
-@keyframes floatUp{
-  0%{opacity:0;transform:translateY(0) rotate(0)}
-  15%{opacity:.7}
-  100%{opacity:0;transform:translateY(-115vh) rotate(40deg)}
-}
-
-@keyframes twinkle{
-  from{opacity:.2;transform:scale(.7)}
-  to{opacity:1;transform:scale(1.25)}
-}
-
-@keyframes wobble{
-  0%,100%{rotate:0deg}
-  35%{rotate:-7deg}
-  70%{rotate:6deg}
-}
-
-@keyframes shake{
-  0%,100%{transform:translateX(0)}
-  25%{transform:translateX(-5px)}
-  75%{transform:translateX(5px)}
-}
-
-@keyframes flash{
-  0%{filter:brightness(1)}
-  40%{filter:brightness(1.35)}
-  100%{filter:brightness(1)}
-}
-
-@keyframes orbit{to{transform:rotate(360deg)}}
-
-@keyframes lineIn{
-  to{opacity:1;transform:translateY(0)}
-}
-
-@media(max-width:360px){
-  .card{padding:25px 15px}
-  .choice{padding:13px 16px;font-size:14px}
-  .button-stage{gap:8px}
-}
-
-@media(prefers-reduced-motion:reduce){
-  *,*::before,*::after{
-    animation-duration:.01ms!important;
-    animation-iteration-count:1!important;
-    transition-duration:.01ms!important;
-  }
-}
-</style>
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
 </head>
 
 <body>
+  <button
+    class="music-button"
+    id="musicButton"
+    type="button"
+    aria-pressed="false"
+    aria-label="Bật hoặc tắt nhạc piano"
+  >
+    <span id="musicIcon">♫</span>
+    <span id="musicLabel">Bật nhạc</span>
+  </button>
 
-<button class="music" id="musicBtn">♫ Nhạc: OFF</button>
+  <main class="container" id="mainCard">
+    <div class="top-heart" aria-hidden="true">💗</div>
 
-<main class="card" id="mainCard">
-  <div class="heart" id="mainHeart">♡</div>
-  <p class="eyebrow">MỘT LỜI CHƯA DÁM NÓI</p>
+    <h1>Cậu có yêu tớ không?</h1>
 
-  <h1 id="question">Cậu có yêu tớ không?</h1>
-
-  <p class="description" id="description">
-    Có một điều tớ giữ trong lòng đã lâu.<br>
-    Hôm nay, tớ muốn hỏi cậu một lần...
-  </p>
-
-  <div class="divider">✧ ♡ ✧</div>
-
-  <div class="button-stage" id="buttonStage">
-    <button class="choice" id="yesBtn">Có ❤️</button>
-    <button class="choice" id="noBtn">Không 🥺</button>
-  </div>
-
-  <div class="counter" id="counter"></div>
-  <p class="footer">một chút dũng cảm · một chút thương ♡</p>
-</main>
-
-<section class="ending" id="ending" aria-hidden="true">
-  <div class="ending-content">
-    <p class="end-eyebrow">GỬI CẬU, NGƯỜI TỚ THƯƠNG</p>
-    <div class="end-heart">💗</div>
-
-    <h2>Tớ cũng thích cậu nhiều lắm ❤️</h2>
-
-    <div class="poem">
-      <p class="line">Bao ngày tớ giấu lời thương,</p>
-      <p class="line">Bao lần muốn ngỏ, lại nhường gió bay.</p>
-      <div class="stanza">
-        <p class="line">Đêm nay gom chút dịu dàng,</p>
-        <p class="line">Gửi cậu một mối mơ màng trong tim.</p>
-      </div>
-    </div>
-
-    <p class="end-note">
-      Có những lời ngại nói thành câu,<br>
-      nên tớ gửi cả trời thương vào đây. ♡
+    <p class="subtitle">
+      Tớ có một điều muốn hỏi cậu từ lâu rồi...<br>
+      Cậu hãy trả lời thật lòng nhé. 🌷
     </p>
 
-    <button class="again" id="againBtn">Đọc lại từ đầu ↺</button>
-  </div>
-</section>
-
-<script>
-const yesBtn=document.getElementById("yesBtn");
-const noBtn=document.getElementById("noBtn");
-const stage=document.getElementById("buttonStage");
-const card=document.getElementById("mainCard");
-const description=document.getElementById("description");
-const question=document.getElementById("question");
-const counter=document.getElementById("counter");
-const heart=document.getElementById("mainHeart");
-const ending=document.getElementById("ending");
-const musicBtn=document.getElementById("musicBtn");
-const againBtn=document.getElementById("againBtn");
-
-let noCount=0;
-let yesScale=1;
-let musicOn=false;
-let audioContext=null;
-let musicTimer=null;
-let noteIndex=0;
-
-const reactions=[
-  "Ơ kìa, cậu nghĩ thêm một chút được không? 🥺",
-  "Tớ đã lấy hết can đảm mới hỏi cậu đó...",
-  "Nếu cậu biết tim tớ đang đập nhanh thế nào...",
-  "Một câu trả lời thôi mà tớ mong mãi 💗",
-  "Tớ vẫn muốn chờ câu trả lời từ trái tim cậu.",
-  "Dù thế nào, cảm ơn cậu đã đọc đến đây. ♡"
-];
-
-// Giữ nút Có lớn dần nhưng không vượt khỏi màn hình.
-function updateYesSize(){
-  const maxWidth=window.innerWidth-36;
-  const baseWidth=yesBtn.offsetWidth||100;
-  const scaleLimit=maxWidth/baseWidth;
-
-  yesScale=Math.min(1+noCount*.48,scaleLimit);
-  yesBtn.style.transform=`scale(${yesScale})`;
-}
-
-// Tìm vị trí khác cho nút Không, tránh nút Có.
-function moveNoButton(){
-  noBtn.style.position="absolute";
-
-  const stageRect=stage.getBoundingClientRect();
-  const yesRect=yesBtn.getBoundingClientRect();
-  const noWidth=noBtn.offsetWidth;
-  const noHeight=noBtn.offsetHeight;
-
-  const candidates=[
-    {x:0,y:-48},
-    {x:0,y:48},
-    {x:-70,y:0},
-    {x:70,y:0},
-    {x:-55,y:-38},
-    {x:55,y:38}
-  ];
-
-  const safe=candidates.filter(p=>{
-    const left=stageRect.width/2+p.x-noWidth/2;
-    const top=stageRect.height/2+p.y-noHeight/2;
-
-    const overlaps=!(
-      left+noWidth < stageRect.width/2-yesBtn.offsetWidth/2-12 ||
-      left > stageRect.width/2+yesBtn.offsetWidth/2+12 ||
-      top+noHeight < stageRect.height/2-yesBtn.offsetHeight/2-12 ||
-      top > stageRect.height/2+yesBtn.offsetHeight/2+12
-    );
-
-    return left>=0 &&
-      left+noWidth<=stageRect.width &&
-      top>=0 &&
-      top+noHeight<=stageRect.height &&
-      !overlaps;
-  });
-
-  if(safe.length){
-    const pos=safe[Math.floor(Math.random()*safe.length)];
-
-    noBtn.style.left=`calc(50% + ${pos.x}px)`;
-    noBtn.style.top=`calc(50% + ${pos.y}px)`;
-    noBtn.style.transform=
-      `translate(-50%,-50%) scale(${Math.max(.5,1-noCount*.07)})`;
-  }else{
-    // Nếu không còn vị trí an toàn, giữ nút trong hàng.
-    noBtn.style.position="relative";
-    noBtn.style.left="0";
-    noBtn.style.top="0";
-    noBtn.style.transform=`scale(${Math.max(.5,1-noCount*.07)})`;
-  }
-}
-
-function handleNo(){
-  if(noCount>=7)return;
-
-  noCount++;
-  updateYesSize();
-
-  card.classList.remove("shake","flash");
-  void card.offsetWidth;
-  card.classList.add(noCount%3===0?"flash":"shake");
-
-  heart.textContent=["♡","💗","💓","💖","💕"][noCount%5];
-
-  if(noCount<7){
-    description.textContent=
-      reactions[(noCount-1)%reactions.length];
-
-    counter.textContent=`Cậu đã chọn Không ${noCount} lần ♡`;
-
-    noBtn.classList.remove("dodge");
-    void noBtn.offsetWidth;
-    noBtn.classList.add("dodge");
-
-    if(noCount>=2)moveNoButton();
-
-    for(let i=0;i<3;i++)createHeart(true);
-  }
-
-  if(noCount>=5){
-    question.textContent="Cậu chắc chưa đó? 🥹";
-    yesBtn.textContent="Có màaa ❤️";
-  }
-
-  if(noCount>=7){
-    // Cho nút Không tan dần trước khi ẩn.
-    noBtn.style.pointerEvents="none";
-    noBtn.style.opacity="0";
-    noBtn.style.transform="scale(.1) rotate(-20deg)";
-
-    setTimeout(()=>{
-      noBtn.style.display="none";
-
-      question.textContent="Chỉ còn một điều muốn hỏi…";
-
-      description.innerHTML=
-        "Nếu lòng cậu chưa cùng nhịp,<br>"+
-        "cậu cứ nhẹ nhàng rời đi.<br>"+
-        "Tớ chẳng mong cậu miễn cưỡng,<br>"+
-        "chỉ mong cậu thật lòng với tớ. ♡";
-
-      counter.textContent="";
-      yesBtn.textContent="Đồng ý ❤️";
-      yesBtn.style.transform="scale(1.08)";
-      stage.style.minHeight="90px";
-    },350);
-  }
-}
-
-noBtn.addEventListener("click",handleNo);
-
-// Chỉ né khi rê chuột trên máy tính; không tự chạy khi dùng cảm ứng.
-noBtn.addEventListener("pointerenter",()=>{
-  if(noCount>=3 && window.innerWidth>700 && noCount<7){
-    moveNoButton();
-  }
-});
-
-yesBtn.addEventListener("click",()=>{
-  ending.classList.add("show");
-  ending.setAttribute("aria-hidden","false");
-  document.body.style.overflow="hidden";
-
-  createSparkles();
-
-  for(let i=0;i<24;i++)createHeart(true);
-});
-
-function createHeart(force=false){
-  if(!force && ending.classList.contains("show"))return;
-
-  const el=document.createElement("span");
-  el.className="float-heart";
-  el.textContent=["♡","♥","✧","💗"][
-    Math.floor(Math.random()*4)
-  ];
-
-  el.style.left=Math.random()*100+"vw";
-  el.style.fontSize=12+Math.random()*22+"px";
-  el.style.color=["#c6a5ff","#f5a8d7","#fff0ff"][
-    Math.floor(Math.random()*3)
-  ];
-  el.style.animationDuration=4+Math.random()*5+"s";
-
-  document.body.appendChild(el);
-  setTimeout(()=>el.remove(),9500);
-}
-
-setInterval(()=>createHeart(),700);
-
-function createSparkles(){
-  ending.querySelectorAll(".sparkle").forEach(e=>e.remove());
-
-  for(let i=0;i<45;i++){
-    const s=document.createElement("span");
-    s.className="sparkle";
-    s.textContent=Math.random()>.5?"✦":"✧";
-    s.style.left=Math.random()*100+"%";
-    s.style.top=Math.random()*100+"%";
-    s.style.fontSize=10+Math.random()*20+"px";
-    s.style.animationDelay=Math.random()*2+"s";
-    ending.appendChild(s);
-  }
-}
-
-// Piano tổng hợp đơn giản bằng Web Audio API.
-const melody=[
-  [261.63,329.63,392],
-  [220,261.63,329.63],
-  [174.61,220,261.63],
-  [196,246.94,293.66],
-  [261.63,329.63,392],
-  [196,246.94,329.63],
-  [174.61,220,293.66],
-  [196,246.94,392]
-];
-
-function playNote(freq,duration=1.8,volume=.025){
-  if(!audioContext||!musicOn)return;
-
-  const osc=audioContext.createOscillator();
-  const gain=audioContext.createGain();
-
-  osc.type="sine";
-  osc.frequency.value=freq;
-
-  gain.gain.setValueAtTime(volume,audioContext.currentTime);
-  gain.gain.exponentialRampToValueAtTime(
-    .001,audioContext.currentTime+duration
-  );
-
-  osc.connect(gain);
-  gain.connect(audioContext.destination);
-
-  osc.start();
-  osc.stop(audioContext.currentTime+duration);
-}
-
-function playMusicStep(){
-  if(!musicOn)return;
-
-  const chord=melody[noteIndex%melody.length];
-
-  chord.forEach((freq,i)=>{
-    setTimeout(()=>playNote(freq,2,.025/(i+1)),i*45);
-  });
-
-  noteIndex++;
-}
-
-musicBtn.addEventListener("click",async()=>{
-  const AudioClass=window.AudioContext||window.webkitAudioContext;
-
-  if(!AudioClass){
-    alert("Trình duyệt chưa hỗ trợ phát nhạc.");
-    return;
-  }
-
-  if(!audioContext)audioContext=new AudioClass();
-
-  if(musicOn){
-    musicOn=false;
-    clearInterval(musicTimer);
-    musicBtn.textContent="♫ Nhạc: OFF";
-  }else{
-    await audioContext.resume();
-    musicOn=true;
-    musicBtn.textContent="♫ Nhạc: ON";
-    playMusicStep();
-    musicTimer=setInterval(playMusicStep,1800);
-  }
-});
-
-// Quay về trạng thái ban đầu.
-againBtn.addEventListener("click",()=>{
-  ending.classList.remove("show");
-  ending.setAttribute("aria-hidden","true");
-  document.body.style.overflow="";
-
-  noCount=0;
-  yesScale=1;
-
-  question.textContent="Cậu có yêu tớ không?";
-
-  description.innerHTML=
-    "Có một điều tớ giữ trong lòng đã lâu.<br>"+
-    "Hôm nay, tớ muốn hỏi cậu một lần...";
-
-  counter.textContent="";
-  heart.textContent="♡";
-
-  yesBtn.textContent="Có ❤️";
-  yesBtn.style.transform="";
-
-  noBtn.style.display="";
-  noBtn.style.opacity="1";
-  noBtn.style.pointerEvents="";
-  noBtn.style.position="relative";
-  noBtn.style.left="";
-  noBtn.style.top="";
-  noBtn.style.transform="";
-
-  stage.style.minHeight="145px";
-});
-
-window.addEventListener("resize",()=>{
-  if(noCount>0 && noCount<7)updateYesSize();
-});
-</script>
-
+    <div class="buttons" id="buttonArea">
+      <button class="btn yes-button" id="yesButton" type="button">
+        Có chứ! ❤️
+      </button>
+
+      <button class="btn no-button" id="noButton" type="button">
+        Không 🙈
+      </button>
+    </div>
+
+    <p class="hint" id="hint" aria-live="polite">
+      Một câu trả lời nhỏ, có thể làm tớ vui cả ngày. ♡
+    </p>
+
+    <p class="counter" id="counter"></p>
+  </main>
+
+  <section
+    class="ending"
+    id="ending"
+    aria-hidden="true"
+    aria-label="Lời nhắn dành cho cậu"
+  >
+    <div class="ending-content">
+      <div class="ending-heart" aria-hidden="true">💖</div>
+
+      <h2>Tớ cũng thích cậu nhiều lắm!</h2>
+
+      <p class="poem">Giữa muôn ánh sáng trên trời,
+Tớ mong được thấy nụ cười của cậu.
+Chẳng cần hứa hẹn mai sau,
+Chỉ mong chân thật bên nhau mỗi ngày. 💗</p>
+
+      <p class="ending-note">
+        Cảm ơn cậu vì đã lắng nghe trái tim tớ. ✨
+      </p>
+
+      <button class="restart-button" id="restartButton" type="button">
+        Đọc lại từ đầu ↻
+      </button>
+    </div>
+  </section>
+
+  <script>
+    /* =========================
+       1. CÂU TRẢ LỜI KHI BẤM "KHÔNG"
+       ========================= */
+    const yesButton = document.getElementById("yesButton");
+    const noButton = document.getElementById("noButton");
+    const hint = document.getElementById("hint");
+    const counter = document.getElementById("counter");
+    const buttonArea = document.getElementById("buttonArea");
+    const mainCard = document.getElementById("mainCard");
+    const ending = document.getElementById("ending");
+    const restartButton = document.getElementById("restartButton");
+
+    const messages = [
+      "Ơ kìa... cậu thử nghĩ lại một chút được không? 🥺",
+      "Tim tớ vừa hụt mất một nhịp rồi đó...",
+      "Một chút xíu cơ hội cũng không có sao? 🌷",
+      "Tớ sẽ vui lắm nếu cậu chọn Có đó! 💗",
+      "Nút Có đang chờ cậu kìa... 🙈",
+      "Tớ không muốn làm cậu khó xử đâu. Hãy chọn điều cậu thật lòng nhé.",
+      "Dù câu trả lời là gì, tớ vẫn tôn trọng cậu. ♡"
+    ];
+
+    let noClicks = 0;
+    let yesScale = 1;
+    let noScale = 1;
+    let finished = false;
+
+    noButton.addEventListener("click", () => {
+      if (finished) return;
+
+      noClicks++;
+
+      if (noClicks <= messages.length) {
+        hint.textContent = messages[noClicks - 1];
+      }
+
+      yesScale = Math.min(yesScale + 0.16, 2.2);
+      noScale = Math.max(noScale - 0.1, 0.55);
+
+      yesButton.style.transform = `scale(${yesScale})`;
+      yesButton.style.fontSize = `${16 + (yesScale - 1) * 2}px`;
+
+      noButton.style.transform = `scale(${noScale})`;
+
+      counter.textContent = `Cậu đã chọn Không ${noClicks} lần rồi 💞`;
+
+      if (noClicks >= 7) {
+        noButton.style.opacity = "0";
+        noButton.style.pointerEvents = "none";
+        noButton.style.position = "absolute";
+        noButton.style.transform = "scale(0.1)";
+        hint.textContent =
+          "Nếu lòng cậu chưa cùng nhịp, cậu cứ nhẹ nhàng rời đi. Tớ chẳng mong cậu miễn cưỡng, chỉ mong cậu thật lòng với tớ. ♡";
+        counter.textContent = "";
+      }
+    });
+
+    /* =========================
+       2. CHỌN "CÓ"
+       ========================= */
+    yesButton.addEventListener("click", () => {
+      finished = true;
+      ending.classList.add("active");
+      ending.setAttribute("aria-hidden", "false");
+      mainCard.style.opacity = "0";
+      mainCard.style.pointerEvents = "none";
+      createStars();
+      startHearts();
+    });
+
+    /* =========================
+       3. ĐỌC LẠI TỪ ĐẦU
+       ========================= */
+    restartButton.addEventListener("click", () => {
+      finished = false;
+      noClicks = 0;
+      yesScale = 1;
+      noScale = 1;
+
+      yesButton.style.transform = "";
+      yesButton.style.fontSize = "";
+      noButton.style.transform = "";
+      noButton.style.opacity = "1";
+      noButton.style.pointerEvents = "auto";
+      noButton.style.position = "relative";
+
+      hint.textContent =
+        "Một câu trả lời nhỏ, có thể làm tớ vui cả ngày. ♡";
+      counter.textContent = "";
+
+      ending.classList.remove("active");
+      ending.setAttribute("aria-hidden", "true");
+      mainCard.style.opacity = "1";
+      mainCard.style.pointerEvents = "auto";
+    });
+
+    /* =========================
+       4. TRÁI TIM BAY
+       ========================= */
+    let heartTimer = null;
+
+    function createHeart() {
+      const heart = document.createElement("span");
+      heart.className = "floating-heart";
+
+      const symbols = ["💗", "💕", "💖", "♡", "🌸"];
+      heart.textContent = symbols[
+        Math.floor(Math.random() * symbols.length)
+      ];
+
+      heart.style.left = `${Math.random() * 100}vw`;
+      heart.style.fontSize = `${14 + Math.random() * 20}px`;
+      heart.style.animationDuration = `${5 + Math.random() * 5}s`;
+
+      document.body.appendChild(heart);
+
+      heart.addEventListener("animationend", () => heart.remove());
+    }
+
+    function startHearts() {
+      if (heartTimer) return;
+
+      for (let i = 0; i < 12; i++) {
+        setTimeout(createHeart, i * 180);
+      }
+
+      heartTimer = setInterval(createHeart, 650);
+    }
+
+    /* =========================
+       5. BẦU TRỜI SAO
+       ========================= */
+    let starsCreated = false;
+
+    function createStars() {
+      if (starsCreated) return;
+      starsCreated = true;
+
+      for (let i = 0; i < 75; i++) {
+        const star = document.createElement("span");
+        star.className = "star";
+        star.style.left = `${Math.random() * 100}%`;
+        star.style.top = `${Math.random() * 100}%`;
+        star.style.animationDuration = `${1 + Math.random() * 3}s`;
+        star.style.animationDelay = `${Math.random() * 2}s`;
+
+        ending.appendChild(star);
+      }
+    }
+
+    /* =========================
+       6. NHẠC PIANO TỰ TẠO
+       Không cần tải file nhạc.
+       Trình duyệt cần thao tác của người dùng
+       để cho phép phát âm thanh.
+       ========================= */
+    const musicButton = document.getElementById("musicButton");
+    const musicIcon = document.getElementById("musicIcon");
+    const musicLabel = document.getElementById("musicLabel");
+
+    let audioContext = null;
+    let musicTimer = null;
+    let musicOn = false;
+    let noteIndex = 0;
+
+    const melody = [
+      [523.25, 0.0],
+      [659.25, 0.5],
+      [783.99, 1.0],
+      [659.25, 1.5],
+      [698.46, 2.0],
+      [659.25, 2.5],
+      [587.33, 3.0],
+      [523.25, 3.5],
+      [587.33, 4.0],
+      [698.46, 4.5],
+      [783.99, 5.0],
+      [698.46, 5.5],
+      [659.25, 6.0],
+      [587.33, 6.5],
+      [523.25, 7.0],
+      [587.33, 7.5]
+    ];
+
+    function playNote(frequency, startTime, duration = 0.42) {
+      if (!audioContext) return;
+
+      const oscillator = audioContext.createOscillator();
+      const gain = audioContext.createGain();
+
+      oscillator.type = "sine";
+      oscillator.frequency.setValueAtTime(frequency, startTime);
+
+      gain.gain.setValueAtTime(0.0001, startTime);
+      gain.gain.exponentialRampToValueAtTime(0.11, startTime + 0.035);
+      gain.gain.exponentialRampToValueAtTime(
+        0.0001,
+        startTime + duration
+      );
+
+      oscillator.connect(gain);
+      gain.connect(audioContext.destination);
+
+      oscillator.start(startTime);
+      oscillator.stop(startTime + duration + 0.03);
+    }
+
+    function playMelody() {
+      if (!musicOn || !audioContext) return;
+
+      const note = melody[noteIndex % melody.length];
+      const now = audioContext.currentTime;
+
+      playNote(note[0], now, 0.42);
+
+      /* Nốt trầm nhẹ tạo cảm giác đệm piano */
+      if (noteIndex % 4 === 0) {
+        playNote(note[0] / 2, now, 0.8);
+      }
+
+      noteIndex++;
+    }
+
+    async function toggleMusic() {
+      try {
+        if (!audioContext) {
+          const AudioContextClass =
+            window.AudioContext || window.webkitAudioContext;
+
+          if (!AudioContextClass) {
+            musicLabel.textContent = "Trình duyệt không hỗ trợ";
+            return;
+          }
+
+          audioContext = new AudioContextClass();
+        }
+
+        if (musicOn) {
+          musicOn = false;
+          clearInterval(musicTimer);
+          musicTimer = null;
+
+          musicIcon.textContent = "♫";
+          musicLabel.textContent = "Bật nhạc";
+          musicButton.setAttribute("aria-pressed", "false");
+          return;
+        }
+
+        await audioContext.resume();
+
+        musicOn = true;
+        noteIndex = 0;
+
+        playMelody();
+        musicTimer = setInterval(playMelody, 500);
+
+        musicIcon.textContent = "♪";
+        musicLabel.textContent = "Tắt nhạc";
+        musicButton.setAttribute("aria-pressed", "true");
+      } catch (error) {
+        musicLabel.textContent = "Không phát được nhạc";
+      }
+    }
+
+    musicButton.addEventListener("click", toggleMusic);
+  </script>
 </body>
 </html>
